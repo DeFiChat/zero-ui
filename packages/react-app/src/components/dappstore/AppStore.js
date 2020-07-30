@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Box from '3box';
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import Atlas from "../Atlas"
 import Nav from "./storecomps/Nav";
 import { BounceLoader } from "react-spinners";
 
@@ -74,13 +75,12 @@ export default class AppStore extends Component {
 
   render() {
     if(this.state.needToAWeb3Browser){
-      return <h1>Please install metamask</h1>
+      return <h1>Please install MetaMask</h1>
     }
     return (
       <Router>
-        <div>
-          <Nav />
-
+        <div className="row">  
+          <div className="col-md-9">     
           <Switch>
             <Route exact path="/profile">
             {this.state.space && (
@@ -97,7 +97,7 @@ export default class AppStore extends Component {
                 </div>
               )}
             </Route>
-            <Route exact path="/chat">
+            <Route exact path="/groups">
                <Chat 
                   box={this.state.box}
                   space={this.state.space}
@@ -106,7 +106,7 @@ export default class AppStore extends Component {
                   thread={this.state.thread}
                />
             </Route>
-            <Route exact path="/add-application">
+            <Route exact path="/create">
                 {this.state.accounts && (
                   <AddApp
                   accounts={this.state.accounts}
@@ -119,7 +119,7 @@ export default class AppStore extends Component {
                   getAppsThread={this.getAppsThread.bind(this)}
                 />
               )}
-              {!this.state.accounts && <h1>Login with metamask</h1>}
+              {!this.state.accounts && <h1>Login with MetaMask</h1>}
             </Route>
             <Route exact path="/">
               <Home 
@@ -133,6 +133,8 @@ export default class AppStore extends Component {
               />
             </Route>
           </Switch>
+          </div>
+          <div className="col-md-3"><Nav/></div> 
         </div>
       </Router>
     );

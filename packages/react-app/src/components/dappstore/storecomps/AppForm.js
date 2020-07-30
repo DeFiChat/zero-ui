@@ -26,17 +26,17 @@ export default class AppForm extends Component {
 
   render() {
     return (
-      <div style={{ maxWidth: "500px", margin: "auto" }}>
+      <div style={{ maxWidth: "500px", margin: "30px auto" }}>
         {!this.state.submitted && (
           <form onSubmit={this.handleSubmit}>
             <div className="form-group">
-              <label htmlFor="name">Name:</label>
+              <label htmlFor="ame">App Name:</label>
               <input
                 type="text"
                 name="name"
                 className="form-control"
                 aria-describedby="appName"
-                placeholder="Enter App Name"
+                placeholder="App name"
                 value={this.state.name}
                 onChange={this.handleChange}
               />
@@ -60,7 +60,7 @@ export default class AppForm extends Component {
                 name="appImage"
                 className="form-control"
                 aria-describedby="application image"
-                placeholder="Add an image"
+                placeholder="Add image"
                 value={this.state.appImage}
                 onChange={this.handleChange}
               />
@@ -72,16 +72,16 @@ export default class AppForm extends Component {
                 name="description"
                 className="form-control"
                 aria-describedby="description"
-                placeholder="Add a description"
+                placeholder="Add description"
                 value={this.state.description}
                 onChange={this.handleChange}
               />
             </div>
-            <input type="submit" value="Submit" className="btn btn-primary" />
+            <input type="submit" value="SUBMIT" className="btn btn-success" />
           </form>
         )}
         {this.state.submitted && <div className="jumbotron">
-          <h1>Thank you for submiting</h1>
+          <h1>Thanks for creating an App :)</h1>
           <button className="btn btn-secondary"  onClick={()=>(this.setState({submitted : false}))}>Add another application </button>
            </div>}
       </div>

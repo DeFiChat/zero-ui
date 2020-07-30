@@ -4,7 +4,7 @@ import { ethers } from "ethers";
 import "./App.css";
 import { Row, Col, Input, Button, Spin, Menu, Tabs, Carousel } from 'antd';
 import { ApiFilled, AppleOutlined, AndroidOutlined, MessageTwoToned, MenuOutlined, CodeOutlined, 
-  BarcodeOutlined, HourglassOutlined,
+  BarcodeOutlined, HourglassOutlined, PlayCircleOutlined, CalculatorOutlined, SearchOutlined,
   HddOutlined, SwapOutlined, LinkOutlined, SwitcherOutlined, ScanOutlined, ShakeOutlined, RocketOutlined,
   AreaChartOutlined, DotChartOutlined, LineChartOutlined, PieChartFilled, PictureOutlined, SolutionOutlined,
   AppstoreOutlined,
@@ -23,11 +23,10 @@ import Chatter from "./components/Chatter"
 //import DataTable from "./components/DataTable"
 import SideBar from "./components/Bread"
 import Interject from "./components/Interject"
-import MenuButton from "./components/MenuButton"
+//import MenuButton from "./components/MenuButton"
 import Uniform from "./components/Uniform"
-
+import Atlas from "./components/Atlas"
 import AppStore from "./components/dappstore/AppStore"
-
 
 
 const { TextArea } = Input;
@@ -159,27 +158,37 @@ function App() {
           price={price}
         />
       </div>
-      <Tabs defaultActiveKey="3">
+      <Tabs className="bar-tab" defaultActiveKey="3">
         <TabPane
           tab={
             <span>
-              <SwitcherOutlined />
-              APP$
+              <SearchOutlined />
             </span>
           }
           key="1"
         >   
-          {/* INSERT BRAHMA COMPONENT
-          <DappStore /> */}
-          <AppStore />
-          <div style={{position:'fixed',textAlign:'right',right:0,bottom:20,padding:10}}>
+          <AppStore />                   
+        </TabPane>
+        <TabPane
+          tab={
+            <span>
+              <CodeOutlined />
+            </span>
+          }
+          key="2"
+        >
+          <div style={{position:'fixed',textAlign:'right',left:80,top:120,padding:10,margin:10}}>
             <Row align="middle" gutter={4}>
               <Col span={10}>
                 <Provider name={"mainnet"} provider={mainnetProvider} />
               </Col>
+            </Row>
+            <Row align="middle" gutter={4}>
               <Col span={6}>
                 <Provider name={"local"} provider={localProvider} />
               </Col>
+            </Row>
+            <Row align="middle" gutter={4}>              
               <Col span={8}>
                 <Provider name={"injected"} provider={injectedProvider} />
               </Col>
@@ -200,21 +209,52 @@ function App() {
                 />
               </Col>
             </Row>
-          </div>                    
+          </div>     
         </TabPane>
         <TabPane
           tab={
             <span>
-              <CodeOutlined />
-              BONDS
+              <SolutionOutlined />
             </span>
           }
-          key="2"
+          key="3"
         >
-          <Uniform />        
+          <Carousel effect="fade">
+            <div>
+              <h3>LEADERBOARD</h3>
+            </div>
+            <div>
+              <h3>SMART POOLS</h3>
+            </div>
+            <div>
+              <h3>MARKET VOLUME</h3>
+            </div>
+            <div>
+              <h3>YIELD RATES</h3>
+            </div>
+          </Carousel>
+          <div className="chat-box">
+            <Chatter/>
+            <Uniform />
+            <Chatter>
+              <Chatter>                
+                <Chatter/>              
+              </Chatter>
+            </Chatter>
+            <Chatter/>
+          </div>  
+        </TabPane> 
+        <TabPane
+          tab={
+            <span>
+              <LineChartOutlined />
+            </span>
+          }
+          key="4"
+        >            
           <div className="main-frame">
             <div style={{padding:32,textAlign: "left"}}>
-              Content Link: <Input value="" onChange={(e)=>{
+              Content URL: <Input value="" onChange={(e)=>{
               }} />
               <Button disbaled="false" style={{margin:8}} size="large" shape="round" type="primary" >
                 Claim
@@ -253,75 +293,17 @@ function App() {
             <div style={{padding:32,textAlign: "left"}}>
               {attestationDisplay}
             </div>
-          </div>     
-        </TabPane>
-        <TabPane
-          tab={
-            <span>
-              <SolutionOutlined />
-              CODES
-            </span>
-          }
-          key="3"
-        >
-          <Carousel effect="fade">
-            <div>
-              <h3>BITCOIN</h3>
-            </div>
-            <div>
-              <h3>ETHEREUM</h3>
-            </div>
-            <div>
-              <h3>FILECOIN</h3>
-            </div>
-            <div>
-              <h3>TIMESWAP</h3>
-            </div>
-          </Carousel> 
-        </TabPane> 
-        <TabPane
-          tab={
-            <span>
-              <LineChartOutlined />
-              DEFI
-            </span>
-          }
-          key="4"
-        >
-          <Carousel effect="fade">
-            <div>
-              <h3>AAVE</h3>
-            </div>
-            <div>
-              <h3>BALANCER</h3>
-            </div>
-            <div>
-              <h3>COMPOUND</h3>
-            </div>
-            <div>
-              <h3>DYDX</h3>
-            </div>
-          </Carousel>
-          <div className="chat-box">
-            <Chatter/>
-            <Uniform />
-            <Chatter>
-              <Chatter>                
-                <Chatter/>              
-              </Chatter>
-            </Chatter>
-          </div>        
+          </div>             
         </TabPane>                
         <TabPane
           tab={
             <span>
               <SwapOutlined />
-              ETHER
             </span>
           }
           key="5"
         >
-          {<div style={{padding:64,textAlign: "left"}}>
+          {<div style={{padding:64,textAlign: "right" }}>
             <Contract
               name={"Attestor"}
               provider={injectedProvider}

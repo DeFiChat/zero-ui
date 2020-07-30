@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 import { Button, Menu } from 'antd'
 import { ApiFilled, AppleOutlined, AndroidOutlined, MessageTwoToned, MenuOutlined, CodeOutlined, HddOutlined, CalculatorOutlined,
   AreaChartOutlined, DotChartOutlined, PieChartFilled, BarcodeOutlined, HourglassOutlined, PictureOutlined, SolutionOutlined, SelectOutlined,
+  RightOutlined, LeftOutlined,
   AppstoreOutlined,
   MenuUnfoldOutlined,
   MenuFoldOutlined,
@@ -29,9 +31,9 @@ class MenuButton extends React.Component {
 
   render() {
 	  return (
-		<div className="menu-posture" style={{ width: 256 }}>
-	        <Button type="secondary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
-	          {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
+		<div className="menu-posture" style={{ width: 180 }}>
+	        <Button type="secondary" onClick={this.toggleCollapsed} style={{ paddingBottom: 10, marginBottom: 6 }}>
+	          {React.createElement(this.state.collapsed ? RightOutlined : LeftOutlined)}
 	        </Button>
 	        <Menu
 	          defaultSelectedKeys={['1']}
@@ -55,7 +57,7 @@ class MenuButton extends React.Component {
 	          </SubMenu>	          
 	          <SubMenu key="sub3" icon={<MailOutlined />} title={<MailOutlined />}>
 	            <Menu.Item key="7">TimeSwap</Menu.Item>
-	            <Menu.Item key="8">ZeFi Chat</Menu.Item>
+	            <Menu.Item key="8">Zero Chat</Menu.Item>
 	          </SubMenu>	
 	          <SubMenu key="sub4" icon={<AreaChartOutlined/>} title={<AreaChartOutlined/>}>
 	            <Menu.Item key="9">Assets</Menu.Item>

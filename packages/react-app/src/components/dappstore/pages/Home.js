@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import ProfileHover from "profile-hover";
 import { BounceLoader } from "react-spinners";
 import ModalDialogue from "../storecomps/ModalDialogue";
+import ChatBox from '3box-chatbox-react/lib/index.js';
+import { Card } from 'antd';
+import { SPACE_NAME, THREAD_NAME } from "../Constants";
+import { Smile } from "../../../smile.png";
 
 class AppCard extends Component {
   render(){
@@ -61,13 +65,25 @@ export default class Home extends Component {
   render() {
     return (
       <div className="container" style={{ textAlign: "center" }}>
-        <h1 className="brand-font" style={{ fontSize: "4rem" }}>
-          Distribute
-        </h1>
-        <p>The Decentralised App Store.</p>
+        <h2 className="brand-font" style={{ fontSize: "3rem" }}>
+          3Box
+        </h2>
+        <p>Decentralized Identity</p>
+        <h2 className="brand-font" style={{ fontSize: "3rem" }}>
+          wFILE
+        </h2>
+        <p>Wrapped FIL on Ethereum</p>        
+        <h2 className="brand-font" style={{ fontSize: "3rem" }}>
+          TimeSwap
+        </h2>
+        <p>Automated Bonding Protocol</p>  
+        <h2 className="brand-font" style={{ fontSize: "3rem" }}>
+          Zero Chat
+        </h2>
+        <p>Yield Farming Chat Rooms</p>
         <div className="row" style={{ marginTop: "10%" }}>
           {(!this.props.posts || this.props.posts.length < 1) && (
-            <div style={{ width: "60px", margin: "auto" }}>
+            <div style={{ width: "30px", margin: "auto" }}>
               <BounceLoader color={"blue"} />
             </div>
           )}
@@ -87,6 +103,27 @@ export default class Home extends Component {
                   );
                 })}
             </div>
+          <ChatBox
+            spaceName={SPACE_NAME}  
+            threadName={THREAD_NAME}
+            box={this.props.box}
+            currentUserAddr="0x343712AbA29A21c9eB50Cc98D556028485146913"
+
+            //optional fields
+            mute={true}
+            popupChat
+            showEmoji
+            colorTheme="#181F21"
+            currentUser3BoxProfile={this.props.threeBoxProfile}
+            //userProfileURL={address => `https://3box.io/${address}`}
+            //spaceOpts={}
+            //threadOpts={}
+            agentProfile={{
+                chatName:"CHAT",
+                imageUrl:{Smile}
+                } 
+            }
+          />
           </div>
         </div>
       </div>

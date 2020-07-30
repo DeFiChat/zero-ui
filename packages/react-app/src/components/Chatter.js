@@ -3,7 +3,7 @@ import { Comment, Avatar } from 'antd';
 
 const Chatter = ({ children }) => (
   <Comment
-    actions={[<span key="comment-nested-reply-to">Reply to</span>]}
+    actions={[<span key="comment-nested-reply-to">Challenge</span>]}
     author={<a>Vitalik Buterin</a>}
     avatar={
       <Avatar

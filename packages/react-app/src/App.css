@@ -26,6 +26,7 @@
 
 .ant-page-header-heading-title {
 	font-weight: 800;
+  font-size: 40px;
 }
 .main-frame {
   margin: 0.1rem 3.1rem;
@@ -33,6 +34,21 @@
 
 .mini-bar {
   font-size: 0.3rem;
+}
+
+.bar-tab {
+  position: relative;
+  top: -30px;
+}
+
+.centered {
+  margin: 0 auto;
+  padding-left: 10px;
+  z-index: 2000;
+}
+
+.edit_page {
+  padding-left: 10px;
 }
 
 .chat-box {
@@ -43,6 +59,17 @@
 .wrap-form {
 	margin-left: 30px;
 }
+
+.nav-item {
+  float: left;
+}
+
+.rand {
+  padding-left: 50px;
+  width: 100%;
+  height: 100vh;
+}
+
 .fl-left {
 	float: left;
 	
@@ -59,18 +86,41 @@
 	border-color: green;
 }
 
+.logicButton {
+  transform: rotate(360deg);
+  height: 49px !important;
+  width: 49px !important;
+  font-size: 20px;
+  padding: 4px !important;
+}
+
+.ant-btn-round.ant-btn-lg {
+
+}
+
 div.ant-modal-content {
 	border-radius: 15px;
 }
-
+.ant-tabs-nav-wrapd {
+  position: fixed;
+  top: 20px;
+  left: 40%;
+}
 .ant-carousel .slick-slide {
   text-align: center;
-  height: 160px;
-  line-height: 160px;
-  background: black;
+  height: 140px;
+  line-height: 140px;
   overflow: hidden;
 }
 
+.ant-carousel .slick-dots li button {
+  background: black !important;
+}
+
+.ant-carousel .slick-dots li.slick_active button {
+  background: black !important;
+}
+
 .ant-carousel .slick-slide h3 {
-  color: #fff;
+  color: black;
 }

@@ -10,9 +10,9 @@ export default function Header(props) {
         window.open("https://github.com/DeFiChat");
       }}>
         <PageHeader
-          title="ZERO💭"
+          title="Z"
           subTitle=""
-          style={{cursor:'pointer', fontWeieght:'800'}}
+          style={{cursor:'pointer'}}
         />      
       </div>
       <MenuButton className="menu-posture"/>

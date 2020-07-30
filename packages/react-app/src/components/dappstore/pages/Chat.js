@@ -1,7 +1,10 @@
 //import ChatBox from '3box-chatbox-react';
 import ChatBox from '3box-chatbox-react/lib/index.js';
 import React, { Component } from "react";
+import { Card } from 'antd';
 import { SPACE_NAME, THREAD_NAME } from "../Constants";
+import { Smile } from "../../../smile.png";
+import Atlas from "../../Atlas";
 
 export default class Chat extends Component {
   state = {
@@ -10,7 +13,8 @@ export default class Chat extends Component {
     return (
       <div className="container">
         <div style={{margin : 'auto'}}>
-          <h1 style={{textAlign : "center"}}>This is your chat box.....</h1>
+          <Atlas/>        
+          <h1 style={{textAlign : "center"}}><Card title="Open Debate..."/></h1>          
           <ChatBox
             spaceName={SPACE_NAME}  
             threadName={THREAD_NAME}
@@ -27,8 +31,9 @@ export default class Chat extends Component {
             //spaceOpts={}
             //threadOpts={}
             agentProfile={{
-                chatName:"ZeFi Privacy ChatBox",
-                imageUrl:"https://imgur.com/RXJO8FD"
+                chatName:"CHAT",
+                imageUrl:{Smile},
+                height:"30"
                 } 
             }
           />

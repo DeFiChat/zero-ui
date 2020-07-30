@@ -85,11 +85,11 @@ export default function Account(props) {
   if(typeof props.setInjectedProvider == "function"){
     if (web3Modal.cachedProvider) {
       modalButtons.push(
-        <Button key="logoutbutton" style={{verticalAlign:"top",marginLeft:8,marginTop:4}} shape={"round"} size={"large"}  onClick={logoutOfWeb3Modal}><LogoutOutlined /></Button>
+        <Button className="logicButton" key="logoutbutton" style={{verticalAlign:"top",marginLeft:8,marginTop:2 }} shape={"round"} size={"large"}  onClick={logoutOfWeb3Modal}><LogoutOutlined /></Button>
       )
     }else{
       modalButtons.push(
-        <Button key="loginbutton" style={{verticalAlign:"top",marginLeft:8,marginTop:4}} shape={"round"} size={"large"} type={props.minimized?"default":"primary"} onClick={loadWeb3Modal}><LoginOutlined/></Button>
+        <Button className="logicButton" key="loginbutton" style={{verticalAlign:"top",marginLeft:8,marginTop:2 }} shape={"round"} size={"large"} type={props.minimized?"default":"primary"} onClick={loadWeb3Modal}><LoginOutlined/></Button>
       )
     }
   }

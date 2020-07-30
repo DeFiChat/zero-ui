@@ -36,8 +36,8 @@ class Bond extends React.Component {
 
   onFill = () => {
     this.formRef.current.setFieldsValue({
-      note: 'BTCETH',
-      side: 'UTXO (Log)',
+      info: 'TIMESWAP',
+      time: 'NOW (*)',
     });
   };
 
@@ -56,8 +56,8 @@ class Bond extends React.Component {
           <Input />
         </Form.Item>
         <Form.Item
-          name="sign"
-          label="Signed"
+          name="time"
+          label="Time"
           rules={[
             {
               required: true,
@@ -76,10 +76,10 @@ class Bond extends React.Component {
         </Form.Item>
         <Form.Item
           noStyle
-          shouldUpdate={(prevValues, currentValues) => prevValues.sign !== currentValues.sign}
+          shouldUpdate={(prevValues, currentValues) => prevValues.time !== currentValues.time}
         >
           {({ getFieldValue }) =>
-            getFieldValue('Sign') === 'other' ? (
+            getFieldValue('Time') === 'other' ? (
               <Form.Item
                 name="customizeAsset"
                 label="Customize Asset"

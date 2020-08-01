@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Box from '3box';
 import "bootstrap/dist/css/bootstrap.min.css";
+// import ProfileHover from 'profile-hover';
+import ProfilePicture from './ProfilePicture';
 
 let DUMMY_DATA = []
 
@@ -113,7 +115,7 @@ export default class GhostChat extends React.Component {
                     <SendMessageForm
                         sendMessage={this.sendMessage} />
                 </div>
-                            
+
             </div>
         )
     }
@@ -128,7 +130,7 @@ class MessageList extends React.Component {
                     return (
                         <li key={message.postId} className="message">
                             <div>
-                                {message.author}
+                                <ProfilePicture did={message.author} />
                             </div>
                             <div>
                                 {message.message}

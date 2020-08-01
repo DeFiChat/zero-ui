@@ -1,21 +1,15 @@
 const ipfsAPI = require('ipfs-http-client');
 const { globSource } = ipfsAPI
 const ipfs = ipfsAPI({host: 'ipfs.infura.io', port: '5001', protocol: 'https' })
-<<<<<<< HEAD
-=======
 
->>>>>>> ipfs-example
 //run your own ipfs daemon: https://docs.ipfs.io/how-to/command-line-quick-start/#install-ipfs
 //const ipfs = ipfsAPI({host: 'localhost', port: '5001', protocol: 'http' })
 
 const addOptions = {
   //pin: true,//uncomment for localhost
   wrapWithDirectory: true,
-<<<<<<< HEAD
   //timeout: 240000
-=======
   //timeout: 0
->>>>>>> ipfs-example
 };
 
 const deploy = async ()=>{

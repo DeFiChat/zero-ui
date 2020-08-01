@@ -27,7 +27,7 @@ import Interject from "./components/Interject"
 import Uniform from "./components/Uniform"
 import Atlas from "./components/Atlas"
 import AppStore from "./components/dappstore/AppStore"
-
+import GhostChat from "./components/GhostChat"
 
 const { TextArea } = Input;
 const { BufferList } = require('bl')
@@ -234,14 +234,15 @@ function App() {
             </div>
           </Carousel>
           <div className="chat-box">
-            <Chatter/>
             <Uniform />
+            {/* <Chatter/>
             <Chatter>
               <Chatter>                
                 <Chatter/>              
               </Chatter>
             </Chatter>
-            <Chatter/>
+            <Chatter/> */}
+            <GhostChat />
           </div>  
         </TabPane> 
         <TabPane

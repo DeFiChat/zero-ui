@@ -221,20 +221,20 @@ function App() {
         >
           <Carousel effect="fade">
             <div>
-              <h3>LEADERBOARD</h3>
+              <h3>Bitcoin</h3>
             </div>
             <div>
-              <h3>SMART POOLS</h3>
+              <h3>Ethereum</h3>
             </div>
             <div>
-              <h3>MARKET VOLUME</h3>
+              <h3>Filecoin</h3>
             </div>
             <div>
-              <h3>YIELD RATES</h3>
+              <h3>Timeswap</h3>
             </div>
           </Carousel>
           <div className="chat-box">
-            <Uniform />
+            {/* <Uniform /> */}
             {/* <Chatter/>
             <Chatter>
               <Chatter>                

@@ -3,9 +3,10 @@ import Box from '3box';
 import "bootstrap/dist/css/bootstrap.min.css";
 // import ProfileHover from 'profile-hover';
 import ProfilePicture from './ProfilePicture';
+import { Tabs } from 'antd';
 
 let DUMMY_DATA = []
-
+const { TabPane } = Tabs
 
 // const browserHistory = window.History.createBrowserHistory();
 
@@ -20,7 +21,10 @@ export default class GhostChat extends React.Component {
             myDid: '',
             myProfile: {},
             // isAppReady: false,
-            topicList: ['topic1', 'topic2'],
+            threadList: {
+                Timeswap: '',
+                Uniswap: '',
+            },
             // disableLogin: false,
             currentThread: ''
         }
@@ -28,6 +32,7 @@ export default class GhostChat extends React.Component {
         this.handleLogin = this.handleLogin.bind(this);
         this.setupThread = this.setupThread.bind(this);
         this.updateThreadPosts = this.updateThreadPosts.bind(this);
+        this.changeThread = this.changeThread.bind(this);
     }
 
     componentDidMount() {
@@ -69,29 +74,61 @@ export default class GhostChat extends React.Component {
     sendMessage = async (text) => {
         // DUMMY_DATA.push({ senderId: "newMessage", text: text });
         // this.setState({ messages: DUMMY_DATA })
+        console.log('sendMessage function current thread is: ', this.state.currentThread)
         await this.state.currentThread.post(text);
     }
 
     setupThread = async () => {
         console.log('chatspace is: ', this.state.chatSpace);
         let space = this.state.chatSpace;
-        const thread = await space.joinThread('topic1', {
+        console.log('current tab is: ', document.getElementsByClassName('thread-tab')[0].getElementsByClassName('ant-tabs-tab-active')[0].textContent)
+        const thread1 = await space.joinThread('Timeswap', {
             ghost: true,
             ghostBacklogLimit: 20 // optional and defaults to 50
         })
-        console.log('thread is:', thread);
-        this.setState({ currentThread: thread });
-        thread.onUpdate(() => this.updateThreadPosts());
+        const thread2 = await space.joinThread('Uniswap', {
+            ghost: true,
+            ghostBacklogLimit: 20 // optional and defaults to 50
+        })
+        console.log('setupThread thread1 is:', thread1);
+        console.log('setupThread thread2 is:', thread2);
+        await this.setState({ currentThread: thread1 });
+        await this.setState({ threadList: { ...this.state.threadList, Timeswap: thread1 } });
+        await this.setState({ threadList: { ...this.state.threadList, Uniswap: thread2 } });
+        thread1.onUpdate(() => this.updateThreadPosts());
+        thread2.onUpdate(() => this.updateThreadPosts());
 
         // now get all current posts
         this.updateThreadPosts();
     }
     updateThreadPosts = async () => {
         console.log('entered updateThreadPosts function')
+
         let threadData = []
-        // Step 3 - get posts in thread
+        let threadName = document.getElementsByClassName('thread-tab')[0].getElementsByClassName('ant-tabs-tab-active')[0].textContent;
+        await this.setState({ currentThread: this.state.threadList[threadName] });
+
+        console.log('threadName is: ', threadName, ' & current thread is: ', this.state.currentThread)
         const posts = await this.state.currentThread.getPosts();
         console.log('posts in current topic: ', posts)
+        threadData.push(...posts)
+        console.log('threadData is: ', threadData);
+        this.setState({ messages: threadData });
+    }
+    changeThread = async () => {
+        console.log('entered changeThread function')
+
+        let threadData = []
+        let threadName = document.getElementsByClassName('thread-tab')[0].getElementsByClassName('ant-tabs-tab-active')[0].textContent;
+        if (threadName == 'Timeswap') {
+            threadName = 'Uniswap'
+        } else {
+            threadName = 'Timeswap'
+        }
+        await this.setState({ currentThread: this.state.threadList[threadName] });
+        // this.setState({ threadList: { ...this.state.threadList, Timeswap: thread1 } });
+        console.log('threadName is: ', threadName, ' & current thread is: ', this.state.currentThread)
+        const posts = await this.state.currentThread.getPosts();
         threadData.push(...posts)
         console.log('threadData is: ', threadData);
         this.setState({ messages: threadData });
@@ -110,7 +147,9 @@ export default class GhostChat extends React.Component {
         return (
             <div className="GhostChat">
                 <div>
-                    <Title />
+                    {/* <Title /> */}
+                    <ThreadTabsComponent
+                        changeThread={this.changeThread} />
                     <MessageList messages={this.state.messages} chatSpace={this.state.chatSpace} />
                     <SendMessageForm
                         sendMessage={this.sendMessage} />
@@ -182,9 +221,9 @@ class SendMessageForm extends React.Component {
     }
 }
 
-function Title() {
-    return <p className="title">My awesome chat app</p>
-}
+// function Title() {
+//     return <p className="title">My awesome chat app</p>
+// }
 
 class LoginComponent extends React.Component {
     render() {
@@ -199,6 +238,37 @@ class LoginComponent extends React.Component {
     }
 }
 
+class ThreadTabsComponent extends React.Component {
+    render() {
+        return (
+            <div className="threadName">
+                <Tabs className="thread-tab" defaultActiveKey="1" onChange={this.props.changeThread}>
+                    <TabPane
+                        tab={
+                            <span>
+                                Timeswap
+                            </span>
+                        }
+                        key="1"
+                    >
+                        Screen 1
+                    </TabPane>
+
+                    <TabPane
+                        tab={
+                            <span>
+                                Uniswap
+                            </span>
+                        }
+                        key="2"
+                    >
+                        Screen 2
+                    </TabPane>
+                </Tabs>
+            </div>
+        )
+    }
+}
 // const Root = () => (
 //     <Router history={browserHistory}>
 //         <Route path="/" component={App} />

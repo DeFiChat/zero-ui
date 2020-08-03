@@ -2,41 +2,26 @@ import React, { useState, useEffect } from 'react'
 import 'antd/dist/antd.css';
 import { ethers } from "ethers";
 import "./App.css";
-import { Row, Col, Input, Button, Spin, Menu, Tabs, Carousel } from 'antd';
-import { ApiFilled, AppleOutlined, AndroidOutlined, MessageTwoToned, MenuOutlined, CodeOutlined, 
-  BarcodeOutlined, HourglassOutlined, PlayCircleOutlined, CalculatorOutlined, SearchOutlined,
-  HddOutlined, SwapOutlined, LinkOutlined, SwitcherOutlined, ScanOutlined, ShakeOutlined, RocketOutlined,
-  AreaChartOutlined, DotChartOutlined, LineChartOutlined, PieChartFilled, PictureOutlined, SolutionOutlined,
-  AppstoreOutlined,
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  PieChartOutlined,
-  DesktopOutlined,
-  ContainerOutlined,
-  MailOutlined,
+import { Row, Col, Input, Button, Spin, Tabs } from 'antd';
+import {
+  CodeOutlined, SearchOutlined, SwapOutlined, LineChartOutlined, SolutionOutlined
+
 } from '@ant-design/icons';
 import { Transactor } from "./helpers"
 import { useExchangePrice, useGasPrice, useContractLoader, useContractReader } from "./hooks"
 import { Header, Account, Provider, Faucet, Ramp, Address, Contract, } from "./components"
 import Bond from "./components/Bond"
-import Chatter from "./components/Chatter"
-//import DataTable from "./components/DataTable"
-import SideBar from "./components/Bread"
-import Interject from "./components/Interject"
 //import MenuButton from "./components/MenuButton"
-import Uniform from "./components/Uniform"
-import Atlas from "./components/Atlas"
 import AppStore from "./components/dappstore/AppStore"
 import GhostChat from "./components/GhostChat"
 
 const { TextArea } = Input;
 const { BufferList } = require('bl')
 
-const { SubMenu } = Menu
 const { TabPane } = Tabs
 
 const ipfsAPI = require('ipfs-http-client');
-const ipfs = ipfsAPI({host: 'ipfs.infura.io', port: '5001', protocol: 'https' })
+const ipfs = ipfsAPI({ host: 'ipfs.infura.io', port: '5001', protocol: 'https' })
 
 const getFromIPFS = async hashToGet => {
   for await (const file of ipfs.get(hashToGet)) {
@@ -57,8 +42,8 @@ const addToIPFS = async fileToUpload => {
   }
 }
 
-const mainnetProvider = new ethers.providers.InfuraProvider("mainnet","2717afb6bf164045b5d5468031b93f87")
-const localProvider = new ethers.providers.JsonRpcProvider(process.env.REACT_APP_PROVIDER?process.env.REACT_APP_PROVIDER:"http://localhost:8545")
+const mainnetProvider = new ethers.providers.InfuraProvider("mainnet", "2717afb6bf164045b5d5468031b93f87")
+const localProvider = new ethers.providers.JsonRpcProvider(process.env.REACT_APP_PROVIDER ? process.env.REACT_APP_PROVIDER : "http://localhost:8545")
 
 function App() {
 
@@ -67,65 +52,65 @@ function App() {
   const price = useExchangePrice(mainnetProvider)
   const gasPrice = useGasPrice("fast")
 
-  const tx = Transactor(injectedProvider,gasPrice)
+  const tx = Transactor(injectedProvider, gasPrice)
 
   const readContracts = useContractLoader(localProvider);
   const writeContracts = useContractLoader(injectedProvider);
 
-  const myAttestation = useContractReader(readContracts,"Attestor","attestations",[address],1777);
+  const myAttestation = useContractReader(readContracts, "Attestor", "attestations", [address], 1777);
 
-  const [ data, setData ] = useState()
-  const [ sending, setSending ] = useState()
-  const [ loading, setLoading ] = useState()
-  const [ ipfsHash, setIpfsHash ] = useState()
-  const [ ipfsContents, setIpfsContents ] = useState()
-  const [ attestationContents, setAttestationContents ] = useState()
+  const [data, setData] = useState()
+  const [sending, setSending] = useState()
+  const [loading, setLoading] = useState()
+  const [ipfsHash, setIpfsHash] = useState()
+  const [ipfsContents, setIpfsContents] = useState()
+  const [attestationContents, setAttestationContents] = useState()
 
-  const asyncGetFile = async ()=>{
+  const asyncGetFile = async () => {
     let result = await getFromIPFS(ipfsHash)
     setIpfsContents(result.toString())
   }
 
-  useEffect(()=>{
-    if(ipfsHash) asyncGetFile()
-  },[ipfsHash])
+  useEffect(() => {
+    if (ipfsHash) asyncGetFile()
+  }, [ipfsHash])
 
   let ipfsDisplay = ""
-  if(ipfsHash){
-    if(!ipfsContents){
+  if (ipfsHash) {
+    if (!ipfsContents) {
       ipfsDisplay = (
         <Spin />
       )
-    }else{
+    } else {
       ipfsDisplay = (
-        <pre style={{margin:8,padding:8,border:"1px solid #dddddd",backgroundColor:"#ededed"}}>
+        <pre style={{ margin: 8, padding: 8, border: "1px solid #dddddd", backgroundColor: "#ededed" }}>
           {ipfsContents}
         </pre>
       )
     }
   }
 
-  const asyncGetAttestation = async ()=>{
+  const asyncGetAttestation = async () => {
     let result = await getFromIPFS(myAttestation)
     setAttestationContents(result.toString())
   }
 
-  useEffect(()=>{
-    if(myAttestation) asyncGetAttestation()
-  },[myAttestation])
+  useEffect(() => {
+    if (myAttestation) asyncGetAttestation()
+  }, [myAttestation])
 
 
   let attestationDisplay = ""
-  if(myAttestation){
-    if(!attestationContents){
+  if (myAttestation) {
+    if (!attestationContents) {
       attestationDisplay = (
         <Spin />
       )
-    }else{
+    } else {
       attestationDisplay = (
         <div>
           <Address value={address} /> attests to:
-          <pre style={{margin:8,padding:8,border:"1px solid #dddddd",backgroundColor:"#ededed"}}>
+          <pre style={{ margin: 8, padding: 8, border: "1px solid #dddddd", backgroundColor: "#ededed" }}>
             {attestationContents}
           </pre>
         </div>
@@ -147,7 +132,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <div style={{position:'fixed',textAlign:'right',right:0,top:0,padding:10}}>
+      <div style={{ position: 'fixed', textAlign: 'right', right: 0, top: 0, padding: 10 }}>
         <Account
           address={address}
           setAddress={setAddress}
@@ -166,8 +151,8 @@ function App() {
             </span>
           }
           key="1"
-        >   
-          <AppStore />                   
+        >
+          <AppStore />
         </TabPane>
         <TabPane
           tab={
@@ -177,7 +162,7 @@ function App() {
           }
           key="2"
         >
-          <div style={{position:'fixed',textAlign:'right',left:80,top:120,padding:10,margin:10}}>
+          <div style={{ position: 'fixed', textAlign: 'right', left: 80, top: 120, padding: 10, margin: 10 }}>
             <Row align="middle" gutter={4}>
               <Col span={10}>
                 <Provider name={"mainnet"} provider={mainnetProvider} />
@@ -188,13 +173,13 @@ function App() {
                 <Provider name={"local"} provider={localProvider} />
               </Col>
             </Row>
-            <Row align="middle" gutter={4}>              
+            <Row align="middle" gutter={4}>
               <Col span={8}>
                 <Provider name={"injected"} provider={injectedProvider} />
               </Col>
             </Row>
           </div>
-          <div style={{position:'fixed',textAlign:'left',left:0,bottom:20,padding:10}}>
+          <div style={{ position: 'fixed', textAlign: 'left', left: 0, bottom: 20, padding: 10 }}>
             <Row align="middle" gutter={4}>
               <Col span={9}>
                 <Ramp
@@ -209,7 +194,7 @@ function App() {
                 />
               </Col>
             </Row>
-          </div>     
+          </div>
         </TabPane>
         <TabPane
           tab={
@@ -219,20 +204,45 @@ function App() {
           }
           key="3"
         >
-          <Carousel effect="fade">
-            <div>
-              <h3>Bitcoin</h3>
-            </div>
-            <div>
-              <h3>Ethereum</h3>
-            </div>
-            <div>
-              <h3>Filecoin</h3>
-            </div>
-            <div>
-              <h3>Timeswap</h3>
-            </div>
-          </Carousel>
+          {/* <div className="threadName"> */}
+            {/* <Carousel effect="fade">
+              <div>
+                <h3>Bitcoin</h3>
+              </div>
+              <div>
+                <h3>Ethereum</h3>
+              </div>
+              <div>
+                <h3>Filecoin</h3>
+              </div>
+              <div>
+                <h3>Timeswap</h3>
+              </div>
+            </Carousel> */}
+            {/* <Tabs className="thread-tab" defaultActiveKey="1">
+              <TabPane
+                tab={
+                  <span>
+                    Timeswap
+                  </span>
+                }
+                key="1"
+              >
+                Screen 1
+              </TabPane>
+
+              <TabPane
+                tab={
+                  <span>
+                    Uniswap
+                </span>
+                }
+                key="2"
+              >
+                Screen 2
+              </TabPane>
+            </Tabs> */}
+          {/* </div> */}
           <div className="chat-box">
             {/* <Uniform /> */}
             {/* <Chatter/>
@@ -243,8 +253,8 @@ function App() {
             </Chatter>
             <Chatter/> */}
             <GhostChat />
-          </div>  
-        </TabPane> 
+          </div>
+        </TabPane>
         <TabPane
           tab={
             <span>
@@ -252,50 +262,50 @@ function App() {
             </span>
           }
           key="4"
-        >            
+        >
           <div className="main-frame">
-            <div style={{padding:32,textAlign: "left"}}>
-              Content URL: <Input value="" onChange={(e)=>{
+            <div style={{ padding: 32, textAlign: "left" }}>
+              Content URL: <Input value="" onChange={(e) => {
               }} />
-              <Button disbaled="false" style={{margin:8}} size="large" shape="round" type="primary" >
+              <Button disbaled="false" style={{ margin: 8 }} size="large" shape="round" type="primary" >
                 Claim
               </Button>
               <Bond />
-            </div>           
-            <div className="" style={{padding:32,textAlign: "left"}}>              
-               Add Data Store:
-              <TextArea rows={10} value={data} onChange={(e)=>{
+            </div>
+            <div className="" style={{ padding: 32, textAlign: "left" }}>
+              Add Data Store:
+              <TextArea rows={10} value={data} onChange={(e) => {
                 setData(e.target.value)
               }} />
-              <Button style={{margin:8}} loading={sending} size="large" shape="round" type="primary" onClick={async()=>{
+              <Button style={{ margin: 8 }} loading={sending} size="large" shape="round" type="primary" onClick={async () => {
                 console.log("UPLOADING...")
                 setSending(true)
                 setIpfsHash()
                 setIpfsContents()
                 const result = await addToIPFS(data)
-                if(result && result.path) {
+                if (result && result.path) {
                   setIpfsHash(result.path)
                 }
                 setSending(false)
-                console.log("RESULT:",result)
+                console.log("RESULT:", result)
               }}>Upload to IPFS</Button>
             </div>
-            <div style={{padding:32,textAlign: "left"}}>
-              IPFS Hash: <Input value={ipfsHash} onChange={(e)=>{
+            <div style={{ padding: 32, textAlign: "left" }}>
+              IPFS Hash: <Input value={ipfsHash} onChange={(e) => {
                 setIpfsHash(e.target.value)
               }} />
               {ipfsDisplay}
 
-              <Button disabled={!ipfsHash} style={{margin:8}} size="large" shape="round" type="primary" onClick={async()=>{
-                tx( writeContracts["Attestor"].attest(ipfsHash) )
+              <Button disabled={!ipfsHash} style={{ margin: 8 }} size="large" shape="round" type="primary" onClick={async () => {
+                tx(writeContracts["Attestor"].attest(ipfsHash))
               }}>Attest on Ethereum</Button>
             </div>
 
-            <div style={{padding:32,textAlign: "left"}}>
+            <div style={{ padding: 32, textAlign: "left" }}>
               {attestationDisplay}
             </div>
-          </div>             
-        </TabPane>                
+          </div>
+        </TabPane>
         <TabPane
           tab={
             <span>
@@ -304,13 +314,13 @@ function App() {
           }
           key="5"
         >
-          {<div style={{padding:64,textAlign: "right" }}>
+          {<div style={{ padding: 64, textAlign: "right" }}>
             <Contract
               name={"Attestor"}
               provider={injectedProvider}
               address={address}
             />
-          </div>}          
+          </div>}
         </TabPane>
       </Tabs>
     </div>

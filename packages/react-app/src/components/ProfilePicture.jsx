@@ -21,23 +21,17 @@ class ProfilePicture extends Component {
     let profileName;
 
     if (this.props.did) { // profiles via listModerator or listMember
-      // console.log('DID3 is: ', this.props.did)
       const getConfig = await Box.getConfig(this.props.did);
-      // console.log('getConfig is: ', getConfig);
       ethereumAddress = getConfig.links[getConfig.links.length - 1].address;
-      // const doc = await resolver.resolve(this.props.did);
       const profile = await Box.getProfile(ethereumAddress);
-      // console.log('profile is: ', profile)
       profileName = profile.name;
       profilePicture = profile.image;
-      // ethereumAddress = doc.publicKey[2].ethereumAddress;
     } else { // my profile from login
       const { myAddress, myProfilePicture, myName } = this.props;
       profileName = myName;
       profilePicture = myProfilePicture;
       ethereumAddress = myAddress;
     }
-    // console.log('ethereumAddress for blockie is: ',ethereumAddress )
     const blockie = makeBlockie(ethereumAddress);
     this.setState({ profilePicture, ethereumAddress, profileName, blockie });
   }

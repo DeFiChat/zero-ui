@@ -28,11 +28,14 @@ export default class GhostChat extends React.Component {
         this.setupThread = this.setupThread.bind(this);
         this.updateThreadPosts = this.updateThreadPosts.bind(this);
         this.changeThread = this.changeThread.bind(this);
+
+        this.handleLogin();
+
     }
 
     componentDidMount() {
         const { box } = this.state;
-        this.handleLogin();
+        // this.handleLogin();
     }
 
     handleLogin = async () => {
@@ -41,7 +44,7 @@ export default class GhostChat extends React.Component {
 
         const myProfile = await Box.getProfile(myAddress);
 
-        const box = await Box.openBox(myAddress, window.ethereum, { ghostPinbot: "/dns4/defi-chat-peer.herokuapp.com/wss//ip4/127.0.0.1/tcp/31314/ws" })
+        const box = await Box.openBox(myAddress, window.ethereum, { ghostPinbot: "/dns4/zerouipinbot-peer.herokuapp.com/wss/p2p/QmXABkxnUaosVvvmXYmV24tbhCUFLLV2od9iiXcTkhwyQM" })
         await box.syncDone
 
         const chatSpace = await box.openSpace('ghostchat')
@@ -95,9 +98,13 @@ export default class GhostChat extends React.Component {
             threadName = 'Timeswap'
         }
         await this.setState({ currentThread: this.state.threadList[threadName] });
-        const posts = await this.state.currentThread.getPosts();
-        threadData.push(...posts)
-        await this.setState({ messages: threadData });
+        try {
+            const posts = await this.state.currentThread.getPosts();
+            threadData.push(...posts)
+            await this.setState({ messages: threadData });
+        } catch(e) {
+            console.log('catched error e675765: ', e);
+        }
     }
     render() {
         const {

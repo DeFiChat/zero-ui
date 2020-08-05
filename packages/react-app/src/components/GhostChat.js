@@ -117,22 +117,19 @@ export default class GhostChat extends React.Component {
 
         return (
             <div className="GhostChat">
+                {/* <Title /> */}
                 <div>
-                    {/* <Title /> */}
-                    <div>
-                        <ThreadTabsComponent
-                            changeThread={this.changeThread} />
-                    </div>
-                    <div>
-                        <MessageList messages={this.state.messages} chatSpace={this.state.chatSpace} />
-                    </div>
-                    <br />
-                    <div>
-                        <SendMessageForm
-                            sendMessage={this.sendMessage} />
-                    </div>
+                    <ThreadTabsComponent
+                        changeThread={this.changeThread} />
                 </div>
-
+                <div>
+                    <MessageList messages={this.state.messages} chatSpace={this.state.chatSpace} />
+                </div>
+                <br />
+                <div>
+                    <SendMessageForm 
+                        sendMessage={this.sendMessage} />
+                </div>
             </div>
         )
     }
@@ -190,7 +187,7 @@ class SendMessageForm extends React.Component {
             <form
                 onSubmit={this.handleSubmit}
                 className="send-message-form">
-                <input
+                <input style={{ width: "100%" }}
                     onChange={this.handleChange}
                     value={this.state.message}
                     placeholder="Type your message and hit ENTER"

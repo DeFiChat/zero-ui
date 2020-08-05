@@ -102,7 +102,7 @@ export default class GhostChat extends React.Component {
             const posts = await this.state.currentThread.getPosts();
             threadData.push(...posts)
             await this.setState({ messages: threadData });
-        } catch(e) {
+        } catch (e) {
             console.log('catched error e675765: ', e);
         }
     }
@@ -119,11 +119,18 @@ export default class GhostChat extends React.Component {
             <div className="GhostChat">
                 <div>
                     {/* <Title /> */}
-                    <ThreadTabsComponent
-                        changeThread={this.changeThread} />
-                    <MessageList messages={this.state.messages} chatSpace={this.state.chatSpace} />
-                    <SendMessageForm
-                        sendMessage={this.sendMessage} />
+                    <div>
+                        <ThreadTabsComponent
+                            changeThread={this.changeThread} />
+                    </div>
+                    <div>
+                        <MessageList messages={this.state.messages} chatSpace={this.state.chatSpace} />
+                    </div>
+                    <br />
+                    <div>
+                        <SendMessageForm
+                            sendMessage={this.sendMessage} />
+                    </div>
                 </div>
 
             </div>
@@ -135,7 +142,7 @@ class MessageList extends React.Component {
 
     render() {
         return (
-            <ul className="message-list">
+            <ul style={{ listStyleType: "none" }} className="message-list">
                 {this.props.messages.map((message, index) => {
                     return (
                         <li key={message.postId} className="message">
@@ -143,8 +150,9 @@ class MessageList extends React.Component {
                                 <ProfilePicture did={message.author} />
                             </div>
                             <div>
-                                {message.message}
+                                <p style={{ fontSize: "20px", marginLeft: "7%" }}>{message.message}</p>
                             </div>
+                            <br />
                         </li>
                     )
                 })}
@@ -188,19 +196,6 @@ class SendMessageForm extends React.Component {
                     placeholder="Type your message and hit ENTER"
                     type="text" />
             </form>
-        )
-    }
-}
-
-class LoginComponent extends React.Component {
-    render() {
-        return (
-            <div>
-                <h1>Ghost Chat App</h1>
-                <button onClick={this.props.handleLogin}>
-                    Get Started
-                </button>
-            </div>
         )
     }
 }

@@ -47,33 +47,14 @@ class ProfilePicture extends Component {
     const image = !!profilePicture ? `https://ipfs.infura.io/ipfs/${profilePicture[0].contentUrl['/']}` : blockie;
 
     return (
-      <React.Fragment>
-        {
-          isUseHovers ? (
-            <ProfileHover noTheme address={ethereumAddress} orientation="left">
-              <ProfileTile
-                image={image}
-                isTile={isTile}
-                profileName={profileName}
-                isModerator={isModerator}
-                isOwner={isOwner}
-                address={ethereumAddress}
-              />
-            </ProfileHover>
-          ) : (
-              <ProfileHover noTheme address={ethereumAddress} orientation="left">
-                <ProfileTile
-                  image={image}
-                  isTile={isTile}
-                  profileName={profileName}
-                  isModerator={isModerator}
-                  isOwner={isOwner}
-                  address={ethereumAddress}
-                />
-              </ProfileHover>
-            )
-        }
-      </React.Fragment>
+      <div>
+        <ProfileHover noTheme address={ethereumAddress} orientation="right">
+          <ProfileTile
+            image={image}
+            address={ethereumAddress}
+          />
+        </ProfileHover>
+      </div>
     )
   }
 }

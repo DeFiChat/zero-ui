@@ -44,7 +44,7 @@ export default class GhostChat extends React.Component {
 
         const myProfile = await Box.getProfile(myAddress);
 
-        const box = await Box.openBox(myAddress, window.ethereum, { ghostPinbot: "/dns4/zerouipinbot-peer.herokuapp.com/wss/p2p/QmXABkxnUaosVvvmXYmV24tbhCUFLLV2od9iiXcTkhwyQM" })
+        const box = await Box.openBox(myAddress, window.ethereum, { ghostPinbot: "/dns4/zerouipinbot-peer.herokuapp.com/wss/p2p/QmR9PgePUo1ysniU6Q9H3SfEt2Thas5XErYyoKQfV5d7m3" })
         await box.syncDone
 
         const chatSpace = await box.openSpace('ghostchat')

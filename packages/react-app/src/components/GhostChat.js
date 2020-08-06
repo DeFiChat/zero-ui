@@ -19,7 +19,7 @@ export default class GhostChat extends React.Component {
             myProfile: {},
             threadList: {
                 Timeswap: '',
-                Uniswap: '',
+                Filecoin: '',
             },
             currentThread: ''
         }
@@ -43,8 +43,11 @@ export default class GhostChat extends React.Component {
         const myAddress = addresses[0];
 
         const myProfile = await Box.getProfile(myAddress);
-
-        const box = await Box.openBox(myAddress, window.ethereum, { ghostPinbot: "/dns4/zerouipinbot-peer.herokuapp.com/wss/p2p/QmR9PgePUo1ysniU6Q9H3SfEt2Thas5XErYyoKQfV5d7m3" })
+        // fetch('https://zerouipinbot-api.herokuapp.com/api/v0/peer')
+        // .then(response => response.json())
+        // .then(data => console.log('fetched data:', data));
+        // console.log('opening box')
+        const box = await Box.openBox(myAddress, window.ethereum, { ghostPinbot: "/dns4/zerouipinbot-peer.herokuapp.com/wss/p2p/Qmcms9hbezcuZPqY7rCaV9gGwX38fr1hMm5cxjbv8Puwny" })
         await box.syncDone
 
         const chatSpace = await box.openSpace('ghostchat')
@@ -66,13 +69,13 @@ export default class GhostChat extends React.Component {
             ghost: true,
             ghostBacklogLimit: 20 // optional and defaults to 50
         })
-        const thread2 = await space.joinThread('Uniswap', {
+        const thread2 = await space.joinThread('Filecoin', {
             ghost: true,
             ghostBacklogLimit: 20 // optional and defaults to 50
         })
         await this.setState({ currentThread: thread1 });
         await this.setState({ threadList: { ...this.state.threadList, Timeswap: thread1 } });
-        await this.setState({ threadList: { ...this.state.threadList, Uniswap: thread2 } });
+        await this.setState({ threadList: { ...this.state.threadList, Filecoin: thread2 } });
         thread1.onUpdate(() => this.updateThreadPosts());
         thread2.onUpdate(() => this.updateThreadPosts());
 
@@ -93,7 +96,7 @@ export default class GhostChat extends React.Component {
         let threadData = []
         let threadName = document.getElementsByClassName('thread-tab')[0].getElementsByClassName('ant-tabs-tab-active')[0].textContent;
         if (threadName == 'Timeswap') {
-            threadName = 'Uniswap'
+            threadName = 'Filecoin'
         } else {
             threadName = 'Timeswap'
         }
@@ -215,7 +218,7 @@ class ThreadTabsComponent extends React.Component {
                     <TabPane
                         tab={
                             <span>
-                                Uniswap
+                                Filecoin
                             </span>
                         }
                         key="2"

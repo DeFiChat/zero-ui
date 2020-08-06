@@ -4,7 +4,7 @@ import { ethers } from "ethers";
 import "./App.css";
 import { Row, Col, Input, Button, Spin, Tabs } from 'antd';
 import {
-  CodeOutlined, SearchOutlined, SwapOutlined, LineChartOutlined, SolutionOutlined
+  CodeOutlined, SearchOutlined, SwapOutlined, LineChartOutlined, SolutionOutlined, MessageOutlined, ProfileOutlined
 
 } from '@ant-design/icons';
 import { Transactor } from "./helpers"
@@ -143,11 +143,11 @@ function App() {
           price={price}
         />
       </div>
-      <Tabs className="bar-tab" defaultActiveKey="3">
+      <Tabs className="bar-tab" defaultActiveKey="3" style={{}}>
         <TabPane
           tab={
             <span>
-              <SearchOutlined />
+              <ProfileOutlined style={{ fontSize: '30px' }}/>
             </span>
           }
           key="1"
@@ -157,7 +157,7 @@ function App() {
         <TabPane
           tab={
             <span>
-              <CodeOutlined />
+              <CodeOutlined style={{ fontSize: '30px' }} />
             </span>
           }
           key="2"
@@ -199,7 +199,7 @@ function App() {
         <TabPane
           tab={
             <span>
-              <SolutionOutlined />
+              <MessageOutlined  style={{ fontSize: '30px' }} />
             </span>
           }
           key="3"
@@ -258,7 +258,7 @@ function App() {
         <TabPane
           tab={
             <span>
-              <LineChartOutlined />
+              <LineChartOutlined  style={{ fontSize: '30px' }}/>
             </span>
           }
           key="4"
@@ -309,7 +309,7 @@ function App() {
         <TabPane
           tab={
             <span>
-              <SwapOutlined />
+              <SwapOutlined  style={{ fontSize: '30px' }}/>
             </span>
           }
           key="5"

@@ -7,8 +7,8 @@ export default class Nav extends Component {
       <div className="row">
         <ul className="nav nav-pills nav-stacked" style={{marginBottom : '5%'}}>
           <li className="nav-item col-md-7">
-            <Link className="active nav-link" to="/">
-              STORE
+            <Link className="nav-link" to="/">
+              ABOUT
             </Link>
           </li>
           <li className="nav-item col-md-7">
@@ -16,16 +16,16 @@ export default class Nav extends Component {
               PROFILE
             </Link>
           </li>
-          <li className="nav-item col-md-7">
+          {/* <li className="nav-item col-md-7">
             <Link className="nav-link" to="/create">
               CREATE
             </Link>
-          </li>
-          <li className="nav-item col-md-7">
+          </li> */}
+          {/* <li className="nav-item col-md-7">
             <Link className="nav-link" to="/groups">
               GROUPS
             </Link>
-          </li>
+          </li> */}
         </ul>
       </div>
     );

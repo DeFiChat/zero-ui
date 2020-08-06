@@ -255,7 +255,7 @@ function App() {
             <GhostChat />
           </div>
         </TabPane>
-        <TabPane
+        {/* <TabPane
           tab={
             <span>
               <LineChartOutlined  style={{ fontSize: '30px' }}/>
@@ -321,7 +321,7 @@ function App() {
               address={address}
             />
           </div>}
-        </TabPane>
+        </TabPane> */}
       </Tabs>
     </div>
   );

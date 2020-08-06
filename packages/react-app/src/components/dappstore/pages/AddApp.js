@@ -26,28 +26,6 @@ export default class AddApp extends Component {
           </div>
         )}
         {this.props.thread && <AppForm savePost={this.savePost} />}
-          <ChatBox
-            spaceName={SPACE_NAME}  
-            threadName={THREAD_NAME}
-            box={this.props.box}
-            currentUserAddr="0x343712AbA29A21c9eB50Cc98D556028485146913"
-
-            //optional fields
-            mute={true}
-            popupChat
-            showEmoji
-            colorTheme="#181F21"
-            currentUser3BoxProfile={this.props.threeBoxProfile}
-            //userProfileURL={address => `https://3box.io/${address}`}
-            //spaceOpts={}
-            //threadOpts={}
-            agentProfile={{
-                chatName:"CHAT",
-                imageUrl:{Smile},
-                height:"30"
-                } 
-            }
-          />
       </div>
     );
   }

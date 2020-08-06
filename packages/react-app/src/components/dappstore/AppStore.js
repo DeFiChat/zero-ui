@@ -19,11 +19,11 @@ import { SPACE_NAME, THREAD_NAME } from "./Constants";
 export default class AppStore extends Component {
 
   state = {
-    needToAWeb3Browser : false,
-     box: {},
-     space: {},
-     thread: {},
-     posts: []
+    needToAWeb3Browser: false,
+    box: {},
+    space: {},
+    thread: {},
+    posts: []
   }
   async getAddressFromMetaMask() {
     if (typeof window.ethereum == "undefined") {
@@ -38,21 +38,21 @@ export default class AppStore extends Component {
   async componentDidMount() {
     await this.getAddressFromMetaMask();
     if (this.state.accounts) {
-      
-      const box = await Box.openBox(this.state.accounts[0], window.ethereum); 
+
+      const box = await Box.openBox(this.state.accounts[0], window.ethereum);
       const space = await box.openSpace(SPACE_NAME);  //bps-defi-store
-      this.setState({ space, box }); 
+      this.setState({ space, box });
 
       const thread = await space.joinThread(THREAD_NAME,
-       {
-        // firstModerator: moderatorsEthAddress,
-        // members: false
-        ghost: true,
-        ghostBacklogLimit: 20 // optional and defaults to 50
-      }
+        {
+          // firstModerator: moderatorsEthAddress,
+          // members: false
+          ghost: true,
+          ghostBacklogLimit: 20 // optional and defaults to 50
+        }
       );
 
-      this.setState({ thread }, ()=>(this.getAppsThread()));
+      this.setState({ thread }, () => (this.getAppsThread()));
     }
   }
 
@@ -61,80 +61,80 @@ export default class AppStore extends Component {
       console.error("apps thread not in react state");
       return;
     }
-   const posts = await this.state.thread.getPosts();
-   this.setState({posts});
-   
-   await this.state.thread.onUpdate(async()=> {
-     const posts = await this.state.thread.getPosts();
-     this.setState({posts});
+    const posts = await this.state.thread.getPosts();
+    this.setState({ posts });
+
+    await this.state.thread.onUpdate(async () => {
+      const posts = await this.state.thread.getPosts();
+      this.setState({ posts });
     });
-  
+
   }
 
 
 
   render() {
-    if(this.state.needToAWeb3Browser){
+    if (this.state.needToAWeb3Browser) {
       return <h1>Please install MetaMask</h1>
     }
     return (
       <Router>
-        <div className="row">  
-          <div className="col-md-9">     
-          <Switch>
-            <Route exact path="/profile">
-            {this.state.space && (
-                <Profile
+        <div className="row">
+          <div className="col-md-9">
+            <Switch>
+              <Route exact path="/">
+                <Home
+                  posts={this.state.posts}
+                  space={this.state.space}
+                  box={this.state.box}
+                  getAppsThread={this.getAppsThread}
+                  usersAddress={
+                    this.state.accounts ? this.state.accounts[0] : null
+                  }
+                />
+              </Route>
+              <Route exact path="/groups">
+                <Chat
                   box={this.state.box}
                   space={this.state.space}
                   accounts={this.state.accounts}
                   threeBoxProfile={this.state.threeBoxProfile}
-                />
-              )}
-              {!this.state.space && (
-                <div style={{ width: "60px", margin: "auto" }}>
-                  <BounceLoader color={"blue"} />
-                </div>
-              )}
-            </Route>
-            <Route exact path="/groups">
-               <Chat 
-                  box={this.state.box}
-                  space={this.state.space}
-                  accounts = {this.state.accounts}
-                  threeBoxProfile={this.state.threeBoxProfile}
                   thread={this.state.thread}
-               />
-            </Route>
-            <Route exact path="/create">
+                />
+              </Route>
+              <Route exact path="/create">
                 {this.state.accounts && (
                   <AddApp
-                  accounts={this.state.accounts}
-                  thread={this.state.thread}
-                  box={this.state.box}
-                  space={this.state.space}
-                  threadMembers={this.state.threadMembers}
-                  posts={this.state.posts}
-                  threeBoxProfile={this.state.threeBoxProfile}
-                  getAppsThread={this.getAppsThread.bind(this)}
-                />
-              )}
-              {!this.state.accounts && <h1>Login with MetaMask</h1>}
-            </Route>
-            <Route exact path="/">
-              <Home 
-                   posts={this.state.posts}
-                   space={this.state.space}
-                   box={this.state.box}
-                   getAppsThread={this.getAppsThread}
-                   usersAddress={
-                     this.state.accounts ? this.state.accounts[0] : null
-                   }
-              />
-            </Route>
-          </Switch>
+                    accounts={this.state.accounts}
+                    thread={this.state.thread}
+                    box={this.state.box}
+                    space={this.state.space}
+                    threadMembers={this.state.threadMembers}
+                    posts={this.state.posts}
+                    threeBoxProfile={this.state.threeBoxProfile}
+                    getAppsThread={this.getAppsThread.bind(this)}
+                  />
+                )}
+                {!this.state.accounts && <h1>Login with MetaMask</h1>}
+              </Route>
+              <Route exact path="/profile">
+                {this.state.space && (
+                  <Profile
+                    box={this.state.box}
+                    space={this.state.space}
+                    accounts={this.state.accounts}
+                    threeBoxProfile={this.state.threeBoxProfile}
+                  />
+                )}
+                {!this.state.space && (
+                  <div style={{ width: "60px", margin: "auto" }}>
+                    <BounceLoader color={"blue"} />
+                  </div>
+                )}
+              </Route>
+            </Switch>
           </div>
-          <div className="col-md-3"><Nav/></div> 
+          <div className="col-md-3"><Nav /></div>
         </div>
       </Router>
     );

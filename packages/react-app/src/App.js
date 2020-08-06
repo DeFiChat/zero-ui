@@ -163,11 +163,11 @@ function App() {
           key="2"
         >
           <div>
-            <iframe width="420" height="315"
+            <iframe width="950" height="540"
               src="https://www.youtube.com/embed/DTxE9KV3YrE">
             </iframe>
           </div>
-          <div style={{ position: 'fixed', textAlign: 'right', left: 80, top: 120, padding: 10, margin: 10 }}>
+          <div style={{ position: 'fixed', textAlign: 'right', right: 0, bottom: 20, padding: 10, margin: 10 }}>
             <Row align="middle" gutter={4}>
               <Col span={10}>
                 <Provider name={"mainnet"} provider={mainnetProvider} />

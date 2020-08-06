@@ -147,7 +147,7 @@ function App() {
         <TabPane
           tab={
             <span>
-              <ProfileOutlined style={{ fontSize: '30px' }}/>
+              <ProfileOutlined style={{ fontSize: '30px' }} />
             </span>
           }
           key="1"
@@ -162,6 +162,11 @@ function App() {
           }
           key="2"
         >
+          <div>
+            <iframe width="420" height="315"
+              src="https://www.youtube.com/embed/DTxE9KV3YrE">
+            </iframe>
+          </div>
           <div style={{ position: 'fixed', textAlign: 'right', left: 80, top: 120, padding: 10, margin: 10 }}>
             <Row align="middle" gutter={4}>
               <Col span={10}>
@@ -199,13 +204,13 @@ function App() {
         <TabPane
           tab={
             <span>
-              <MessageOutlined  style={{ fontSize: '30px' }} />
+              <MessageOutlined style={{ fontSize: '30px' }} />
             </span>
           }
           key="3"
         >
           {/* <div className="threadName"> */}
-            {/* <Carousel effect="fade">
+          {/* <Carousel effect="fade">
               <div>
                 <h3>Bitcoin</h3>
               </div>
@@ -219,7 +224,7 @@ function App() {
                 <h3>Timeswap</h3>
               </div>
             </Carousel> */}
-            {/* <Tabs className="thread-tab" defaultActiveKey="1">
+          {/* <Tabs className="thread-tab" defaultActiveKey="1">
               <TabPane
                 tab={
                   <span>

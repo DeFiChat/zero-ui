@@ -70,17 +70,17 @@ export default class Home extends Component {
         </h2>
         <p>Decentralized Identity</p>
         <h2 className="brand-font" style={{ fontSize: "3rem" }}>
-          wFILE
-        </h2>
-        <p>Wrapped FIL on Ethereum</p>
-        <h2 className="brand-font" style={{ fontSize: "3rem" }}>
           TimeSwap
         </h2>
-        <p>Automated Bonding Protocol</p>
+        <p>Give collateralized loans for FIL</p>
         <h2 className="brand-font" style={{ fontSize: "3rem" }}>
-          Zero Chat
+          Chat Rooms
         </h2>
-        <p>Yield Farming Chat Rooms</p>
+        <p>Ghost Chat Rooms</p>
+        <h2 className="brand-font" style={{ fontSize: "3rem" }}>
+          Filecoin
+        </h2>
+        <p>Great value to the Ecosystem</p>
       </div>
     );
   }
